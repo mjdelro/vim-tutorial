@@ -1,178 +1,117 @@
-# vim tutorial <!-- omit in toc -->
+# Vim tutorial
 
-# Table of Contents <!-- omit in toc -->
-- [What is vim](#what-is-vim)
-- [How do I Use vim](#how-do-i-use-vim)
-- [Modes](#modes)
-  - [Normal/Command [Esc]](#normalcommand-esc)
-  - [Insert [i]](#insert-i)
-  - [Visual [v]](#visual-v)
-- [Commands](#commands)
-  - [Saving and Quitting](#saving-and-quitting)
-  - [Movement](#movement)
-    - [By Characters](#by-characters)
-    - [By Words](#by-words)
-    - [Modifiers](#modifiers)
-    - [Moving in Lines](#moving-in-lines)
-    - [Moving to Lines](#moving-to-lines)
-    - [Moving in Blocks](#moving-in-blocks)
-  - [Search](#search)
-  - [Inserting](#inserting)
-  - [Deleting](#deleting)
-  - [Deleting then Inserting](#deleting-then-inserting)
-  - [Multiple Insert](#multiple-insert)
-  - [Replacing](#replacing)
-  - [Repeat Command](#repeat-command)
-  - [Undo and Redo](#undo-and-redo)
-  - [New Lines](#new-lines)
-- [References](#references)
+Vim is a keyboard-driven text editor based on `vi`. This guide covers the commands needed to open a file, move around, make basic edits, and save or quit.
 
-# What is vim
-`vim` is a command-line text editor based on Bill Joy's original `vi` text editor.
+Start Vim with a file:
 
-# How do I Use vim
-You'll need to be able to navigate the command line
+```bash
+vim example.txt
+```
 
-# Modes
-## Normal/Command [Esc]
-**Normal mode** is the first mode your vim will be set as when you start it. Hitting `Esc` will revert you 
-back to Normal mode from any other mode. Considered to be the *browsing* or *reading* mode, it provides you with more efficient ways to navigate and manipulate the file. 
+Vim behaves differently depending on its current mode. If a command does not work as expected, press `Esc` to return to Normal mode and try again.
 
-## Insert [i]
-**Insert mode** can be accessed by pressing the `i` key while in Normal mode. While in insert mode, you are able to write and enter text like in a regular text editor. 
+## Modes
 
-## Visual [v]
-**Visual mode** can be accessed by pressing the `v` key while in Normal mode. While in Visual mode, you are able to select characters, strings and lines before using a command to modify it.
+| Mode | Enter it with | Purpose |
+| --- | --- | --- |
+| Normal | `Esc` | Move through the file and run editing commands |
+| Insert | `i` | Type text before the cursor |
+| Visual | `v` | Select text before applying a command |
 
-# Commands
-## Saving and Quitting
-While in Normal mode, you are able to type in the `Command Palette`, the line at the very bottom of your screen.
+Vim starts in Normal mode. Most commands in this guide assume that mode unless stated otherwise.
 
-Typing in `:q` in the command palette and hitting `Enter` will quit you out of vim.
+## Save and quit
 
-Typing in `:q!` in the command palette and hitting `Enter` will quit you out of vim without saving.
+Press `:` in Normal mode to enter a command on the bottom line, then press `Enter` to run it.
 
-Typing in `:w` in the command palette and hitting `Enter` save your current work.
+| Command | Result |
+| --- | --- |
+| `:w` | Save the file |
+| `:q` | Quit if there are no unsaved changes |
+| `:wq` | Save and quit |
+| `:q!` | Quit and discard unsaved changes |
 
-## Movement
-### By Characters
-While in Normal mode, Basic one cursor movements are handled by the `h`, `j`, `k` and `l` keys.
+## Move around
 
-`h` - Left
+### Characters and words
 
-`j` - Up
+| Key | Movement |
+| --- | --- |
+| `h` | One character left |
+| `j` | One line down |
+| `k` | One line up |
+| `l` | One character right |
+| `b` | Beginning of the current or previous word |
+| `e` | End of the current or next word |
+| `w` | Beginning of the next word |
+| `0` | Beginning of the line |
+| `$` | End of the line |
 
-`k` - Down
+Add a count before a movement to repeat it. For example, `4l` moves four characters right and `2b` moves backward by two words.
 
-`l` - Right
+### Files, lines, and matching characters
 
-### By Words
-Word specific movements are handled by the `b`, `e` and `w` keys.
-
-`b` - beginning of the word.
-
-`e` - end of the word.
-
-`w` - beginning of the next word.
-
-### Modifiers
-Movement can be modified by `numbers`.
-
-`2b` will move to the beginning of the send word.
-
-`4l` will move 4 characters to the right.
-
-`0` will move you to the beginning of the line.
-
-`$` will move you to the end of the line.
-
-### Moving in Lines
-`*` will find the *next* occurence of the word your cursor is under.
-
-`#` will find the *previous* occurence of the word your cursor is under.
-
-### Moving to Lines
-`gg` will move you to the beginning of the file.
-
-`G` will move you to the end of the file.
-
-`36G` will move you to line 36.
-
-### Moving in Blocks
-When in Normal mode, while hovering over a`(`, `[` or `{` character, you can go to the matching `)`, `]` or `}` with the `%` key.
+| Command | Movement |
+| --- | --- |
+| `gg` | First line of the file |
+| `G` | Last line of the file |
+| `36G` | Line 36 |
+| `%` | Matching `()`, `[]`, or `{}` character |
+| `*` | Next occurrence of the word under the cursor |
+| `#` | Previous occurrence of the word under the cursor |
 
 ## Search
-`/` will bring up search on the command palette. 
-`/text` will search for the string `text` in the file.
 
-`n` will move to the next instance of the string you're searching for.
+Type `/text` in Normal mode and press `Enter` to search forward for `text`.
 
-`N` will move to the previous instane of the string you're searching for.
+| Key | Result |
+| --- | --- |
+| `n` | Next match in the same search direction |
+| `N` | Previous match |
 
-## Inserting
-`i` will enter you into Insert mode and let you type to the left of the cursor.
+## Insert text
 
-`I` will enter you into Insert mode and let you type at the first non-blank character.
+| Command | Where Insert mode starts |
+| --- | --- |
+| `i` | Before the cursor |
+| `I` | At the first non-blank character of the line |
+| `a` | After the cursor |
+| `A` | At the end of the line |
+| `o` | On a new line below the current line |
+| `O` | On a new line above the current line |
 
-`a` will enter you into Insert mode and let you type to the right of the cursor
+Press `Esc` when you are done typing. A count also works with insertion: type `6i-`, then press `Esc`, to insert `------`.
 
-`A` will enter you into Insert mode and let you type at the end of the line.
+## Delete or change text
 
-`o`
+Vim combines an operator such as `d` with a movement such as `w`. Counts can come before the operator or movement.
 
-`O`
+| Command | Result |
+| --- | --- |
+| `x` | Delete the character under the cursor |
+| `X` | Delete the character before the cursor |
+| `dd` | Delete the current line |
+| `db` | Delete backward to the beginning of a word |
+| `de` | Delete through the end of the current word |
+| `dw` | Delete to the beginning of the next word |
+| `d4w` | Delete across four word movements |
+| `s` | Delete the character under the cursor and enter Insert mode |
+| `S` | Delete the current line's text and enter Insert mode |
+| `C` | Delete from the cursor to the end of the line and enter Insert mode |
+| `r` | Replace the character under the cursor with the next typed character |
 
+## Repeat and undo
 
+| Command | Result |
+| --- | --- |
+| `.` | Repeat the last change |
+| `u` | Undo the last change |
+| `Ctrl-R` | Redo an undone change |
 
-## Deleting
-`x` will delete characters to the RIGHT of the cursor.
+## Keep learning
 
-`X` will delete character to the LEFT of the cursor.
+Run `vimtutor` in a terminal for Vim's interactive tutorial. These external guides are also useful:
 
-`dd` will delete the line you are hovering over.
-
-`db` will delete from the cursor to the beginning of the word.
-
-`de` will delete from the cursor to the beginning of the next word.
-
-`dw` will delete from the cursor to the end of the current word.
-
-You can modify the commands above with `numbers` after the `d` command.
-
-`d4w` will delete 4 words starting from the cursor.
-
-## Deleting then Inserting
-`s` will delete 
-
-`S`
-
-`C`
-
-## Multiple Insert
-While in Normal mode, you can insert text multiple times by modifying the `i` function with a `number`.
-
-`6i-` then hitting the `Esc` key will enter `------`.
-
-## Replacing
-`r` will allow you to replace/insert onto the character you are highlighting.
-
-## Repeat Command
-`.` will repeat the previous command used.
-
-## Undo and Redo
-`u` will undo your previous action.
-
-`CTRL+R` will redo you previous action.
-
-## New Lines
-`o` will create a new line underneath your selected line.
-
-`O` will create a new line above your selected line.
-
-
-# References
-- Shawn Biddle's vim classes
-  - https://github.com/shawncplus/vim-classes
-  - https://youtu.be/Nim4_f5QUxA
-- Open Vim's Tutorial
-  - https://www.openvim.com/
+- [Shawn Biddle's Vim classes](https://github.com/shawncplus/vim-classes)
+- [Class recording](https://youtu.be/Nim4_f5QUxA)
+- [OpenVim tutorial](https://www.openvim.com/)
