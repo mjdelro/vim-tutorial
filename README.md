@@ -1,4 +1,17 @@
-# Vim tutorial
+<p align="center">
+  <img src="assets/icon.svg" alt="Vim Tutorial Icon" width="104" height="104" />
+</p>
+
+<h1 align="center">Vim Tutorial</h1>
+
+<p align="center">Quick keyboard-driven reference sheet and starter guide for Vim.</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Vim-Reference-019733?style=flat-square&logo=vim&logoColor=white" alt="" />
+  <img src="https://img.shields.io/github/license/mjdelro/vim-tutorial?style=flat-square&color=64748b" alt="" />
+</p>
+
+---
 
 Vim is a keyboard-driven text editor based on `vi`. This guide covers the commands needed to open a file, move around, make basic edits, and save or quit.
 
